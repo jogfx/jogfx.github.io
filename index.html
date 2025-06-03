@@ -316,8 +316,8 @@
 
 <script>
   function switchLang(lang) {
-    document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
     document.getElementById('content-da').style.display = lang === 'da' ? 'block' : 'none';
+    document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
 
     const buttons = document.querySelectorAll('.lang-switcher button');
     buttons.forEach(btn => btn.classList.remove('active'));

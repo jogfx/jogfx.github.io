@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Interactive CV of Oliver Gade Nielsen">
-  <title>Oliver Gade Nielsen -  CV</title>
+  <title>Oliver Gade Nielsen - Interactive CV</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
@@ -14,6 +14,11 @@
       background-color: #f4f7fa;
       color: #222;
       line-height: 1.7;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #e0e0e0;
     }
     .header {
       background: linear-gradient(to right, #00394d, #006080);
@@ -22,6 +27,37 @@
       text-align: center;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
+    .sticky-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #00394d;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 8px 16px;
+      gap: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 999;
+      transform: translateY(-100%);
+      transition: transform 0.3s;
+    }
+    .sticky-bar.visible {
+      transform: translateY(0);
+    }
+    .sticky-bar img {
+      width: 40px;
+      border-radius: 50%;
+    }
+    .sticky-bar h1 {
+      font-size: 1rem;
+      margin: 0;
+    }
+    .sticky-bar span {
+      font-size: 0.85rem;
+      color: #b0d8f1;
+    }
     .profile-img {
       width: 300px;
       border-radius: 50%;
@@ -29,7 +65,6 @@
       border: 4px solid #fff;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     }
-
     .container {
       max-width: 1000px;
       margin: 40px auto;
@@ -37,6 +72,10 @@
       background: #ffffff;
       border-radius: 16px;
       box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    body.dark-mode .container {
+      background-color: #262626;
     }
     h2 {
       border-bottom: 2px solid #ddd;
@@ -49,6 +88,10 @@
       align-items: center;
       gap: 10px;
     }
+    body.dark-mode h2 {
+      color: #80d4ff;
+      border-color: #444;
+    }
     h2::before {
       display: inline-block;
       font-family: 'Font Awesome 6 Free';
@@ -56,11 +99,11 @@
       color: #0077b6;
       margin-right: 8px;
     }
-    h2#work::before { content: '\f0b1'; }      /* briefcase */
-    h2#education::before { content: '\f19d'; }  /* university */
-    h2#volunteer::before { content: '\f4c4'; }  /* hands-helping */
-    h2#languages::before { content: '\f1ab'; }  /* language */
-    h2#references::before { content: '\f328'; } /* address-card */
+    h2#work::before { content: '\f0b1'; }
+    h2#education::before { content: '\f19d'; }
+    h2#volunteer::before { content: '\f4c4'; }
+    h2#languages::before { content: '\f1ab'; }
+    h2#references::before { content: '\f328'; }
 
     details {
       margin-bottom: 20px;
@@ -70,8 +113,15 @@
       background-color: #fefefe;
       transition: all 0.3s ease;
     }
+    body.dark-mode details {
+      background-color: #333;
+      border-color: #555;
+    }
     details[open] {
       background-color: #e1f0f7;
+    }
+    body.dark-mode details[open] {
+      background-color: #2a2a2a;
     }
     summary {
       font-weight: 600;
@@ -81,6 +131,9 @@
       align-items: center;
       gap: 10px;
       color: #004466;
+    }
+    body.dark-mode summary {
+      color: #a8d9ff;
     }
     summary i {
       color: #0077cc;
@@ -122,9 +175,38 @@
       text-decoration: underline;
       color: #005f99;
     }
+    .dark-toggle {
+      text-align: center;
+      font-weight: 500;
+      margin: 30px auto 10px auto;
+      font-size: 1rem;
+      color: #00394d;
+      cursor: pointer;
+    }
+    .dark-toggle:hover {
+      text-decoration: underline;
+    }
+    .dark-toggle i {
+      margin-left: 8px;
+      transition: transform 0.3s;
+    }
+    .dark-toggle:hover i {
+      transform: translateX(4px);
+    }
   </style>
 </head>
 <body>
+<div class="sticky-bar" id="stickyHeader">
+  <img src="471162622_9149779765064723_5347248624849126935_n.jpg" alt="Oliver Gade Nielsen">
+  <div>
+    <h1>Oliver Gade Nielsen</h1>
+    <span>Cand.Merc. Business Data Science – Aalborg University</span>
+  </div>
+</div>
+<div class="dark-toggle" onclick="toggleDarkMode()">
+  Click here to switch to dark mode (and to keep the bugs away)
+  <i class="fas fa-arrow-right"></i>
+</div>
   <div class="header">
     <img class="profile-img" src="471162622_9149779765064723_5347248624849126935_n.jpg" alt="Oliver Gade Nielsen">
     <h1>Oliver Gade Nielsen</h1>
@@ -209,6 +291,20 @@
     summary.parentElement.addEventListener('toggle', () => {
       icon.className = summary.parentElement.open ? 'fas fa-chevron-down' : 'fas fa-chevron-right';
     });
+  });
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
+
+  // Sticky bar reveal
+  window.addEventListener('scroll', () => {
+    const stickyBar = document.getElementById('stickyHeader');
+    if (window.scrollY > 200) {
+      stickyBar.classList.add('visible');
+    } else {
+      stickyBar.classList.remove('visible');
+    }
   });
 </script>
 </body>

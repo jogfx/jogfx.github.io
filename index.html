@@ -38,13 +38,28 @@
       box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
     }
     h2 {
-      border-left: 5px solid #0077b6;
-      padding-left: 12px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 8px;
       margin-top: 50px;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       color: #00394d;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
+    h2::before {
+      content: '\f02d'; /* icon: book */
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: #0077b6;
+    }
+    h2#work::before { content: '\f0b1'; }      /* briefcase */
+    h2#education::before { content: '\f19d'; }  /* university */
+    h2#volunteer::before { content: '\f4c4'; }  /* hands-helping */
+    h2#languages::before { content: '\f1ab'; }  /* language */
+    h2#references::before { content: '\f328'; } /* address-card */
+
     details {
       margin-bottom: 20px;
       padding: 18px;
@@ -97,13 +112,16 @@
       padding-left: 28px;
     }
     a {
-      color: #006699;
-      font-weight: 500;
-      text-decoration: none;
+      color: #222;
+      background-color: #e6f2f9;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background-color 0.3s;
     }
     a:hover {
-      text-decoration: underline;
-      color: #003344;
+      background-color: #cde6f4;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -126,7 +144,7 @@
 
     <h2>Education</h2>
     <details><summary>Cand.Merc. Business Data Science – Aalborg University (2023–2025)</summary><p>Application of data science and machine learning techniques in business. Data-driven business development. Ethical use of AI in business environments.</p></details>
-    <details><summary>BSc in Business Economics – Aalborg University (2020–2023)</summary><p>Focus on circular economy in Danish businesses. Final grade: 10.</p></details>
+    <details><summary>BSc in Business Economics – Aalborg University (2020–2023)</summary><p>bachelor thesis on circular economy in Danish businesses. Final grade: 10.</p></details>
     <details><summary>Travel Guide Training – Utopia Guideschool, Mallorca (2019)</summary><p>Specialization in Hotel Management. Sales, service, complaint handling, guest types, and social media marketing.</p></details>
     <details><summary>HTX Skjern – Communication/IT (2015–2018)</summary><p>Focus on teamwork, structure, and punctuality.</p></details>
 
@@ -153,7 +171,7 @@
 
     <h2>Uddannelse</h2>
     <details><summary>Cand.Merc. Business Data Science – Aalborg Universitet (2023–2025)</summary><p>Brug af datavidenskab og maskinlæring i erhvervslivet. Datadrevet forretningsudvikling. Etisk brug af AI i virksomheder.</p></details>
-    <details><summary>HA Erhvervsøkonomi – Aalborg Universitet (2020–2023)</summary><p>Bachelor med speciale i cirkulær økonomi. Karakter: 10.</p></details>
+    <details><summary>Erhvervsøkonomi, HA – Aalborg Universitet (2020–2023)</summary><p>Bacheloropgave om cirkulær økonomi. Karakter: 10.</p></details>
     <details><summary>Rejselederuddannelse – Utopia Guideschool, Mallorca (2019)</summary><p>Specialisering i Hotel Management. Salg, service, konflikthåndtering og markedsføring.</p></details>
     <details><summary>HTX Skjern – Kommunikation/IT (2015–2018)</summary><p>Fokus på gruppearbejde, struktur og punktlighed.</p></details>
 

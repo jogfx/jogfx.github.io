@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Interactive CV of Oliver Gade Nielsen">
   <title>Oliver Gade Nielsen - CV</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -30,17 +31,32 @@
       padding: 20px;
       background: white;
       border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     h2 {
       border-bottom: 1px solid #ddd;
       padding-bottom: 5px;
+      margin-top: 30px;
     }
     details {
       margin-bottom: 15px;
+      border-left: 3px solid #0077cc;
+      padding-left: 10px;
+      transition: background 0.3s ease;
+    }
+    details[open] {
+      background: #f0f8ff;
     }
     summary {
       font-weight: bold;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    summary i {
+      color: #0077cc;
+      width: 20px;
     }
     .lang-switcher {
       text-align: center;
@@ -54,9 +70,16 @@
       background-color: #0077cc;
       color: white;
       border-radius: 4px;
+      transition: background 0.2s ease-in-out;
+    }
+    .lang-switcher button:hover {
+      background-color: #0062a3;
     }
     .lang-switcher button.active {
       background-color: #005fa3;
+    }
+    ul {
+      padding-left: 20px;
     }
   </style>
 </head>
@@ -127,15 +150,27 @@
     <p>Sendes på anmodning.</p>
   </div>
 
-  <script>
-    function switchLang(lang) {
-      document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
-      document.getElementById('content-da').style.display = lang === 'da' ? 'block' : 'none';
+<script>
+  function switchLang(lang) {
+    document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
+    document.getElementById('content-da').style.display = lang === 'da' ? 'block' : 'none';
 
-      const buttons = document.querySelectorAll('.lang-switcher button');
-      buttons.forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.lang-switcher button[onclick="switchLang('${lang}')"]`).classList.add('active');
-    }
-  </script>
+    const buttons = document.querySelectorAll('.lang-switcher button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.lang-switcher button[onclick="switchLang('${lang}')"]`).classList.add('active');
+  }
+
+  // Animate <details> open/close icon rotation
+  document.querySelectorAll('summary').forEach(summary => {
+    const icon = document.createElement('i');
+    icon.className = 'fas fa-chevron-right';
+    summary.insertBefore(icon, summary.firstChild);
+
+    summary.parentElement.addEventListener('toggle', () => {
+      icon.className = summary.parentElement.open ? 'fas fa-chevron-down' : 'fas fa-chevron-right';
+    });
+  });
+</script>
 </body>
 </html>
+

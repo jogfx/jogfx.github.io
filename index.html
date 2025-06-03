@@ -49,10 +49,11 @@
       gap: 10px;
     }
     h2::before {
-      content: '\f02d'; /* icon: book */
+      display: inline-block;
       font-family: 'Font Awesome 6 Free';
       font-weight: 900;
       color: #0077b6;
+      margin-right: 8px;
     }
     h2#work::before { content: '\f0b1'; }      /* briefcase */
     h2#education::before { content: '\f19d'; }  /* university */
@@ -112,16 +113,13 @@
       padding-left: 28px;
     }
     a {
-      color: #222;
-      background-color: #e6f2f9;
-      padding: 4px 8px;
-      border-radius: 4px;
+      color: #0077cc;
       font-weight: 600;
-      transition: background-color 0.3s;
+      text-decoration: none;
     }
     a:hover {
-      background-color: #cde6f4;
-      text-decoration: none;
+      text-decoration: underline;
+      color: #005f99;
     }
   </style>
 </head>
@@ -214,4 +212,5 @@
 </script>
 </body>
 </html>
+
 

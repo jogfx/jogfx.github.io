@@ -16,10 +16,6 @@
       line-height: 1.7;
       transition: background-color 0.3s, color 0.3s;
     }
-    body.dark-mode {
-      background-color: #1a1a1a;
-      color: #e0e0e0;
-    }
     .header {
       background: linear-gradient(to right, #00394d, #006080);
       color: #fff;
@@ -74,9 +70,6 @@
       box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
       transition: background-color 0.3s, color 0.3s;
     }
-    body.dark-mode .container {
-      background-color: #262626;
-    }
     h2 {
       border-bottom: 2px solid #ddd;
       padding-bottom: 8px;
@@ -87,10 +80,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-    }
-    body.dark-mode h2 {
-      color: #80d4ff;
-      border-color: #444;
     }
     h2::before {
       display: inline-block;
@@ -113,15 +102,8 @@
       background-color: #fefefe;
       transition: all 0.3s ease;
     }
-    body.dark-mode details {
-      background-color: #333;
-      border-color: #555;
-    }
     details[open] {
       background-color: #e1f0f7;
-    }
-    body.dark-mode details[open] {
-      background-color: #2a2a2a;
     }
     summary {
       font-weight: 600;
@@ -131,9 +113,6 @@
       align-items: center;
       gap: 10px;
       color: #004466;
-    }
-    body.dark-mode summary {
-      color: #a8d9ff;
     }
     summary i {
       color: #0077cc;
@@ -175,23 +154,59 @@
       text-decoration: underline;
       color: #005f99;
     }
-    .dark-toggle {
-      text-align: center;
+    .toggle-switch {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px auto;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #0077b6;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .toggle-label {
+      margin-left: 15px;
       font-weight: 500;
-      margin: 30px auto 10px auto;
       font-size: 1rem;
       color: #00394d;
-      cursor: pointer;
     }
-    .dark-toggle:hover {
-      text-decoration: underline;
-    }
-    .dark-toggle i {
-      margin-left: 8px;
-      transition: transform 0.3s;
-    }
-    .dark-toggle:hover i {
-      transform: translateX(4px);
+    body.dark-mode .toggle-label {
+      color: #aad4ff;
     }
   </style>
 </head>
@@ -203,9 +218,12 @@
     <span>Cand.Merc. Business Data Science – Aalborg University</span>
   </div>
 </div>
-<div class="dark-toggle" onclick="toggleDarkMode()">
-  Click here to switch to dark mode (and to keep the bugs away)
-  <i class="fas fa-arrow-right"></i>
+<div class="toggle-switch">
+  <label class="switch">
+    <input type="checkbox" onchange="toggleDarkMode(this)">
+    <span class="slider"></span>
+  </label>
+  <span class="toggle-label">Dark mode (keeps the bugs away)</span>
 </div>
   <div class="header">
     <img class="profile-img" src="471162622_9149779765064723_5347248624849126935_n.jpg" alt="Oliver Gade Nielsen">
@@ -293,11 +311,10 @@
     });
   });
 
-  function toggleDarkMode() {
-    document.body.classList.toggle('dark-mode');
+  function toggleDarkMode(checkbox) {
+    document.body.classList.toggle('dark-mode', checkbox.checked);
   }
 
-  // Sticky bar reveal
   window.addEventListener('scroll', () => {
     const stickyBar = document.getElementById('stickyHeader');
     if (window.scrollY > 200) {
@@ -309,5 +326,6 @@
 </script>
 </body>
 </html>
+
 
 

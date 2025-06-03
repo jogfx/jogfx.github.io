@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Landing page for Oliver Gade Nielsen's interactive CV">
+  <title>Oliver Gade Nielsen - Velkommen</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f7fa;
+      color: #222;
+      line-height: 1.7;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .container {
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 40px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+    h1 {
+      color: #00394d;
+      font-size: 2.2rem;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+    .profile-img {
+      width: 200px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+      margin-bottom: 20px;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #0077b6;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+    }
+    .cta-button:hover {
+      background-color: #005f99;
+    }
+    .lang-switcher {
+      margin-top: 30px;
+    }
+    .lang-switcher button {
+      margin: 0 10px;
+      padding: 8px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 2px solid #0077b6;
+      border-radius: 6px;
+      background-color: #ffffff;
+      color: #0077b6;
+      cursor: pointer;
+    }
+    .lang-switcher button.active,
+    .lang-switcher button:hover {
+      background-color: #0077b6;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+<div class="container" id="landing-da">
+  <img class="profile-img" src="471162622_9149779765064723_5347248624849126935_n.jpg" alt="Oliver Gade Nielsen">
+  <h1>Hej med dig!</h1>
+  <p>Jeg hedder Oliver, og det her er mit interaktive CV!<br>
+     Hvis du er her, fordi jeg har søgt en stilling hos dig – eller du tror, jeg kunne passe til en – tak fordi du kigger forbi!<br>
+     Hvis du bare tilfældigt fandt siden, håber jeg den kan inspirere dig til dit eget interaktive CV.</p>
+  <a href="cv.html" class="cta-button">Gå til CV'et</a>
+</div>
+<div class="container" id="landing-en" style="display:none">
+  <img class="profile-img" src="471162622_9149779765064723_5347248624849126935_n.jpg" alt="Oliver Gade Nielsen">
+  <h1>Hi there!</h1>
+  <p>I'm Oliver, and this is my interactive CV!<br>
+     If you're here because I applied for a position with you – or you think I might be a good fit – thank you for checking me out!<br>
+     If you stumbled across it by chance, I hope it inspires your own interactive CV journey.</p>
+  <a href="cv.html" class="cta-button">Go to CV</a>
+</div>
+<div class="lang-switcher">
+  <button class="active" onclick="switchLang('da')">Dansk</button>
+  <button onclick="switchLang('en')">English</button>
+</div>
+<script>
+  function switchLang(lang) {
+    document.getElementById('landing-da').style.display = lang === 'da' ? 'block' : 'none';
+    document.getElementById('landing-en').style.display = lang === 'en' ? 'block' : 'none';
+    const buttons = document.querySelectorAll('.lang-switcher button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.lang-switcher button[onclick="switchLang('${lang}')"]`).classList.add('active');
+  }
+</script>
+</body>
+</html>
